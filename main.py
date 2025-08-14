@@ -2,12 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+import os
 import time
 
 NANO_ADDRESS = "nano_1xc1soodwjzypreh4jzme4de15p8ooe9fxreg9pgidm33btyzrnck7nxxpa9"
 
-# Try both possible Chromium binary locations
-chromium_paths = ["/usr/bin/chromium-browser", "/usr/bin/chromium"]
+
+# Try all possible Chromium binary locations
+chromium_paths = [
+    "/usr/bin/chromium-browser",
+    "/usr/bin/chromium",
+    "/snap/bin/chromium"
+]
 chromium_binary = None
 for path in chromium_paths:
     if os.path.exists(path):
@@ -24,7 +30,10 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.binary_location = chromium_binary
 
 # Try both possible chromedriver locations
-chromedriver_paths = ["/usr/bin/chromedriver", "/usr/lib/chromium-browser/chromedriver"]
+chromedriver_paths = [
+    "/usr/bin/chromedriver",
+    "/usr/lib/chromium-browser/chromedriver"
+]
 chromedriver_binary = None
 for path in chromedriver_paths:
     if os.path.exists(path):
@@ -48,4 +57,3 @@ try:
     button.click()
     time.sleep(5)
 finally:
-    driver.quit()
