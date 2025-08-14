@@ -6,8 +6,12 @@ import time
 
 NANO_ADDRESS = "nano_1nxm581mokwpco6egnqgenc3qszae68be3956kcctszkeg3iomy1c45xgj9n"
 
-# Try both possible Chromium binary locations
-chromium_paths = ["/usr/bin/chromium-browser", "/usr/bin/chromium"]
+# Try all possible Chromium binary locations
+chromium_paths = [
+    "/usr/bin/chromium-browser",
+    "/usr/bin/chromium",
+    "/snap/bin/chromium"
+]
 chromium_binary = None
 for path in chromium_paths:
     if os.path.exists(path):
@@ -24,7 +28,10 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.binary_location = chromium_binary
 
 # Try both possible chromedriver locations
-chromedriver_paths = ["/usr/bin/chromedriver", "/usr/lib/chromium-browser/chromedriver"]
+chromedriver_paths = [
+    "/usr/bin/chromedriver",
+    "/usr/lib/chromium-browser/chromedriver"
+]
 chromedriver_binary = None
 for path in chromedriver_paths:
     if os.path.exists(path):
