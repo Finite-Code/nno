@@ -1,0 +1,26 @@
+# .github/workflows/auto_script.yml
+name: Schedule
+
+on:
+  schedule:
+    - cron: '*/4 * * * *'  # Every 4 minutes
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install selenium
+          sudo apt-get update
+          sudo apt-get install -y chromium-chromedriver
+          sudo ln -s /usr/bin/chromedriver /usr/local/bin/chromedriver
+      - name: Run script
+        env:
+          NANO_ADDRESS: ${{ secrets.NANO_ADDRESS }}
+        run: python main1.py
