@@ -1,6 +1,6 @@
-# auto_script.py
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import time
 
@@ -10,22 +10,20 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.binary_location = "/usr/bin/chromium-browser"  # Or "/usr/bin/chromium" if needed
 
-driver = webdriver.Chrome(options=chrome_options)
+service = Service("/usr/bin/chromedriver")  # Explicitly set chromedriver path
+
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
 try:
     driver.get("https://freenanofaucet.com/")
-    time.sleep(2)  # Wait for page to load
-
-    # Enter Nano address
+    time.sleep(2)
     input_box = driver.find_element(By.ID, "nanoAddr")
     input_box.clear()
     input_box.send_keys(NANO_ADDRESS)
-
-    # Click the button
     button = driver.find_element(By.ID, "getNano")
     button.click()
-
-    time.sleep(5)  # Wait for any actions to complete
+    time.sleep(5)
 finally:
     driver.quit()
