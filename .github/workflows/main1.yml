@@ -18,8 +18,9 @@ jobs:
         run: |
           pip install selenium
           sudo apt-get update
-          sudo apt-get install -y chromium-chromedriver
-          sudo ln -s /usr/bin/chromedriver /usr/local/bin/chromedriver
+          sudo apt-get install -y chromium-browser chromium-chromedriver || sudo apt-get install -y chromium chromium-driver
+          sudo ln -s /usr/bin/chromedriver /usr/local/bin/chromedriver || sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
+
       - name: Run script
         env:
           NANO_ADDRESS: ${{ secrets.NANO_ADDRESS }}
