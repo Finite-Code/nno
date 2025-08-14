@@ -57,3 +57,4 @@ try:
     button.click()
     time.sleep(5)
 finally:
+    driver.quit()
