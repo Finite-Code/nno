@@ -2,6 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+import os
 import time
 
 NANO_ADDRESS = "nano_1nxm581mokwpco6egnqgenc3qszae68be3956kcctszkeg3iomy1c45xgj9n"
